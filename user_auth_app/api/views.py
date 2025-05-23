@@ -19,10 +19,9 @@ class RegistrationView(APIView):
     permission_classes= [AllowAny]
 
     def post(self, request):
-        serializer = RegistrationSerializer(date=request.data)
+        serializer = RegistrationSerializer(data=request.data)
 
         data = {}
-
         if serializer.is_valid():
             saved_account = serializer.save()
             token, created = Token.objects.get_or_create(user=saved_account)
